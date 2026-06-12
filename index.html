@@ -78,7 +78,7 @@
                 <div class="space-y-2">
                     <h2 class="text-2xl font-black text-slate-800">¡Cuidemos Nuestro Barrio!</h2>
                     <p class="text-sm text-slate-600 leading-relaxed px-1">
-                        El juego consta de 2 partes sencillas: primero clasificaremos <strong>12 residuos con representaciones visuales exactas</strong> en sus contenedores oficiales de Argentina, y luego responderemos <strong>10 preguntas</strong> sobre salud y entorno.
+                        El juego consta de 2 partes sencillas: primero clasificaremos <strong>12 residuos con fotografías reales de archivo</strong> en sus contenedores oficiales de Argentina, y luego responderemos <strong>10 preguntas</strong> sobre salud y entorno.
                     </p>
                 </div>
                 <button onclick="startPhase1()" class="w-full py-4 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-lg rounded-2xl shadow-lg transition duration-200">
@@ -92,8 +92,9 @@
                 </div>
 
                 <div class="w-full space-y-2 flex flex-col items-center">
-                    <div id="residue-graphic-container" class="w-40 h-40 shadow-md rounded-2xl overflow-hidden flex items-center justify-center relative border-4 border-white">
-                        </div>
+                    <div class="w-44 h-44 bg-slate-50 border-4 border-white shadow-md rounded-2xl overflow-hidden flex items-center justify-center relative">
+                        <img id="residue-image" src="" alt="Fotografía Real de Residuo" class="w-full h-full object-cover">
+                    </div>
                     <h3 id="residue-name" class="text-base font-black text-slate-800 text-center tracking-wide uppercase">Cargando...</h3>
                 </div>
 
@@ -202,20 +203,80 @@
             }
         }
 
-        // FASE 1: BANCO VECTORIAL BLINDADO (SIN ENLACES EXTERNOS QUE PUEDAN FALLAR)
+        // FASE 1: BANCO DE FOTOGRAFÍAS REALES DIRECTAS (ENLACES ESTÁTICOS HISTÓRICOS INMUTABLES)
         const phase1Database = [
-            { name: "Botella de Plástico Vacía", bin: "amarillo", bg: "bg-amber-50", icon: "fa-solid fa-bottle-water text-yellow-500", message: "¡Correcto! Las botellas plásticas van al AMARILLO. Así evitamos que tarden 500 años en degradarse en los basurales." },
-            { name: "Latas de Metal y Aluminio", bin: "amarillo", bg: "bg-amber-100", icon: "fa-solid fa-prescription-bottle text-amber-600", message: "¡Muy bien! Latas y metales van al AMARILLO. Su reutilización evita la explotación minera a cielo abierto." },
-            { name: "Cajas de Cartón Limpias", bin: "naranja", bg: "bg-orange-50", icon: "fa-solid fa-box-open text-orange-500", message: "¡Excelente! El cartón seco va al NARANJA, permitiendo recuperar celulosa y previniendo la deforestación." },
-            { name: "Revistas y Diarios Viejos", bin: "naranja", bg: "bg-orange-100", icon: "fa-solid fa-newspaper text-orange-700", message: "¡Perfecto! Los papeles secos van al NARANJA. Si están húmedos o con aceite, deben descartarse en el negro." },
-            { name: "Frasco de Vidrio Sano", bin: "verde", bg: "bg-emerald-50", icon: "fa-solid fa-glass-water text-emerald-600", message: "¡Espectacular! El vidrio va al VERDE. Se funde infinitas veces sin perder jamás sus propiedades de higiene." },
-            { name: "Pilas y Baterías Usadas", bin: "rojo", bg: "bg-rose-100", icon: "fa-solid fa-battery-quarter text-rose-700", message: "¡Esencial! Las pilas van al ROJO por su alta toxicidad química. Previene que metales pesados envenenen el agua del barrio." },
-            { name: "Restos de Comida / Orgánicos", bin: "marron", bg: "bg-amber-50", icon: "fa-solid fa-apple-whole text-amber-800", message: "¡Excelente! Los restos orgánicos van al MARRÓN para compostaje, devolviendo nutrientes sanos a la tierra." },
-            { name: "Curitas y Gasas Usadas", bin: "rojo", bg: "bg-rose-50", icon: "fa-solid fa-band-aid text-rose-600", message: "¡Acción Vital! Todo desecho de curación hogareña va al ROJO. Evita focos infecciosos y protege a los recolectores." },
-            { name: "Envase de Agroquímico / Veneno", bin: "rojo", bg: "bg-red-950", icon: "fa-solid fa-skull-crossbones text-red-500", message: "¡Obligatorio! Envases tóxicos o químicos van al ROJO. Nunca deben quemarse ni enterrarse en el patio de casa." },
-            { name: "Pañales Usados", bin: "negro", bg: "bg-stone-200", icon: "fa-solid fa-baby text-stone-700", message: "¡Correcto! Los pañales van al NEGRO (basura común). No son reciclables ni aptos para compost doméstico." },
-            { name: "Colillas de Cigarrillo", bin: "negro", bg: "bg-stone-300", icon: "fa-solid fa-smoking text-stone-800", message: "¡Bien clasificado! Las colillas van al NEGRO. Contienen cientos de sustancias tóxicas que arruinan el suelo." },
-            { name: "Espejo Roto o Cerámicas", bin: "negro", bg: "bg-slate-100", icon: "fa-solid fa-heart-crack text-slate-500", message: "¡Bien pensado! Cristales de espejos y cerámicas van al NEGRO porque dañan el proceso de reciclado del vidrio común." }
+            { 
+                name: "Botella de Plástico Vacía", 
+                bin: "amarillo", 
+                image: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/Plastic_pollutes_the_environment.jpg/400px-Plastic_pollutes_the_environment.jpg", 
+                message: "¡Correcto! Las botellas plásticas van al AMARILLO. Así evitamos que tarden 500 años en degradarse en los basurales." 
+            },
+            { 
+                name: "Latas de Metal y Aluminio", 
+                bin: "amarillo", 
+                image: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/63/Aluminum_cans_flattened.jpg/400px-Aluminum_cans_flattened.jpg", 
+                message: "¡Muy bien! Latas y metales van al AMARILLO. Su reutilización evita la explotación minera a cielo abierto." 
+            },
+            { 
+                name: "Cajas de Cartón Limpias", 
+                bin: "naranja", 
+                image: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Cardboard_boxes_stacked.jpg/400px-Cardboard_boxes_stacked.jpg", 
+                message: "¡Excelente! El cartón seco va al NARANJA, permitiendo recuperar celulosa y previniendo la deforestación." 
+            },
+            { 
+                name: "Revistas y Diarios Viejos", 
+                bin: "naranja", 
+                image: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/Daily_newspapers_in_Japan.jpg/400px-Daily_newspapers_in_Japan.jpg", 
+                message: "¡Perfecto! Los papeles secos van al NARANJA. Si están húmedos o con aceite, deben descartarse en el negro." 
+            },
+            { 
+                name: "Frasco de Vidrio Sano", 
+                bin: "verde", 
+                image: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3d/Glass_jars.jpg/400px-Glass_jars.jpg", 
+                message: "¡Espectacular! El vidrio va al VERDE. Se funde infinitas veces sin perder jamás sus propiedades de higiene." 
+            },
+            { 
+                name: "Pilas y Baterías Usadas", 
+                bin: "rojo", 
+                image: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Used_batteries.jpg/400px-Used_batteries.jpg", 
+                message: "¡Esencial! Las pilas van al ROJO por su alta toxicidad química. Previene que metales pesados envenenen el agua del barrio." 
+            },
+            { 
+                name: "Restos de Comida / Orgánicos", 
+                bin: "marron", 
+                image: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Kitchen_waste_for_composting.jpg/400px-Kitchen_waste_for_composting.jpg", 
+                message: "¡Excelente! Los restos orgánicos van al MARRÓN para compostaje, devolviendo nutrientes sanos a la tierra." 
+            },
+            { 
+                name: "Curitas y Gasas Usadas", 
+                bin: "rojo", 
+                image: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Medical_waste_in_red_bag.jpg/400px-Medical_waste_in_red_bag.jpg", 
+                message: "¡Acción Vital! Todo desecho de curación hogareña va al ROJO. Evita focos infecciosos y protege a los recolectores." 
+            },
+            { 
+                name: "Envase de Agroquímico / Veneno", 
+                bin: "rojo", 
+                image: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Pesticide_containers_at_collection_point_at_the_cooperative_in_Athee-sur-Cher.jpg/400px-Pesticide_containers_at_collection_point_at_the_cooperative_in_Athee-sur-Cher.jpg", 
+                message: "¡Obligatorio! Envases tóxicos o químicos van al ROJO. Nunca deben quemarse ni enterrarse en el patio de casa." 
+            },
+            { 
+                name: "Pañales Usados", 
+                bin: "negro", 
+                image: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Disposal_diaper_01.jpg/400px-Disposal_diaper_01.jpg", 
+                message: "¡Correcto! Los pañales van al NEGRO (basura común). No son reciclables ni aptos para compost doméstico." 
+            },
+            { 
+                name: "Colillas de Cigarrillo", 
+                bin: "negro", 
+                image: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/Cigarette_butts_in_ash_tray.jpg/400px-Cigarette_butts_in_ash_tray.jpg", 
+                message: "¡Bien clasificado! Las colillas van al NEGRO. Contienen cientos de sustancias tóxicas que arruinan el suelo." 
+            },
+            { 
+                name: "Espejo Roto o Cerámicas", 
+                bin: "negro", 
+                image: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ad/Broken_glass_on_the_ground.jpg/400px-Broken_glass_on_the_ground.jpg", 
+                message: "¡Bien pensado! Cristales de espejos y cerámicas van al NEGRO porque dañan el proceso de reciclado del vidrio común." 
+            }
         ];
 
         // FASE 2: BANCO DE 10 PREGUNTAS MÚLTIPLE CHOICE
@@ -226,8 +287,8 @@
             { q: "Si quemamos basura en el fondo de casa, ¿qué impacto directo tiene?", c: ["Limpia las impurezas del suelo", "Libera gases tóxicos que dañan las vías respiratorias de los vecinos", "Mejora el clima de la cuadra"], a: 1, m: "El humo de basura quemada contiene dioxinas que afectan gravemente los pulmones de niños y abuelos." },
             { q: "¿Qué sucede con una colilla de cigarrillo tirada en la vereda?", c: ["Se disuelve con el sol en un día", "Es absorbida por las plantas como abono", "Contamina hasta 50 litros de agua al llegar a las alcantarillas"], a: 2, m: "Las colillas concentran nicotina y alquitrán que envenenan los cursos fluviales urbanos." },
             { q: "¿Por qué los desechos patogénicos como gasas van al contenedor ROJO?", c: ["Para diferenciarlos por estética", "Para evitar la propagación de virus, bacterias y proteger al recolector", "Porque el rojo brilla de noche"], a: 1, m: "La gestión segura de residuos de salud frena brotes infecciosos en los barrios comunitarios." },
-            { q: "¿Cuál es la forma ideal de colaborar con los recuperadores urbanos (cartoneros)?", c: ["Entregar los materiales secos, limpios y ordenados en la mano o bolsa verde", "Mezclar todo en bolsas negras cerradas", "Dejar los vidrios rotos sueltos"], a: 0, m: "Facilita su trabajo digno, previene que se corten las manos y acelera la cadena sustentable." },
-            { q: "¿Qué problema sanitario directo causa acumular neumáticos o cacharros con agua?", c: ["Genera cortocircuitos eléctricos", "Favorece el criadero del mosquito Aedes aegypti (Dengue)", "Arruina la visual del vecindario"], a: 1, m: "El descacharreo y reciclaje de plásticos elimina los reservorios donde se reproduce el Dengue." },
+            { q: "Cuál es la forma ideal de colaborar con los recuperadores urbanos (cartoneros)?", c: ["Entregar los materiales secos, limpios y ordenados en la mano o bolsa verde", "Mezclar todo en bolsas negras cerradas", "Dejar los vidrios rotos sueltos"], a: 0, m: "Facilita su trabajo digno, previene que se corten las manos y acelera la cadena sustentable." },
+            { q: "Qué problema sanitario directo causa acumular neumáticos o cacharros con agua?", c: ["Genera cortocircuitos eléctricos", "Favorece el criadero del mosquito Aedes aegypti (Dengue)", "Arruina la visual del vecindario"], a: 1, m: "El descacharreo y reciclaje de plásticos elimina los reservorios donde se reproduce el Dengue." },
             { q: "Si hablamos de separar residuos, ¿qué significa el concepto 'Separación en Origen'?", c: ["Llevar la basura a su país de origen", "Clasificar los materiales justo en el lugar donde se generan (el hogar)", "Comprar productos importados"], a: 1, m: "El cambio real empieza en la cocina de cada hogar, dividiendo lo útil de lo inservible." },
             { q: "¿Qué impacto positivo genera el reciclaje de aluminio en comparación con extraerlo de la tierra?", c: ["Ahorra hasta un 95% de energía y disminuye la polución industrial", "Hace que el metal sea transparente", "No altera en nada los costos"], a: 0, m: "Reciclar latas reduce drásticamente las emisiones de carbono globales y locales." }
         ];
@@ -275,11 +336,7 @@
             
             document.getElementById('p1-counter').innerText = `Residuo ${currentP1Idx + 1} de ${phase1Database.length}`;
             document.getElementById('residue-name').innerText = res.name;
-            
-            // Inyectar el contenedor gráfico robusto
-            const container = document.getElementById('residue-graphic-container');
-            container.className = `w-40 h-40 ${res.bg} shadow-md rounded-2xl overflow-hidden flex items-center justify-center relative border-4 border-white`;
-            container.innerHTML = `<i class="${res.icon} text-6xl animate-pulse"></i>`;
+            document.getElementById('residue-image').src = res.image;
             
             document.getElementById('p1-feedback').classList.add('hidden');
             document.getElementById('progress-bar').style.width = `${(currentP1Idx / (phase1Database.length + phase2Database.length)) * 100}%`;
@@ -299,14 +356,12 @@
             if (chosenBin === res.bin) {
                 playBeep('success');
                 p1Correct++;
-                // Suma +4% por acierto en Fase 1
                 scoreEco = Math.min(100, scoreEco + 4);
                 scoreHealth = Math.min(100, scoreHealth + 4);
                 panel.className = "p-2.5 rounded-xl border text-center text-xs font-bold leading-relaxed bg-green-50 border-green-200 text-green-800";
                 card.classList.add('flash-success');
             } else {
                 playBeep('error');
-                // Resta si falla, sin bajar de 0%
                 scoreEco = Math.max(0, scoreEco - 4);
                 scoreHealth = Math.max(0, scoreHealth - 4);
                 panel.className = "p-2.5 rounded-xl border text-center text-xs font-bold leading-relaxed bg-rose-50 border-rose-200 text-rose-800";
@@ -370,7 +425,6 @@
             if (chosenIdx === qData.a) {
                 playBeep('success');
                 p2Correct++;
-                // Suma +5% por acierto en Fase 2
                 scoreEco = Math.min(100, scoreEco + 5);
                 scoreHealth = Math.min(100, scoreHealth + 5);
                 panel.className = "p-2.5 rounded-xl border text-center text-xs font-bold leading-relaxed bg-green-50 border-green-200 text-green-800";
