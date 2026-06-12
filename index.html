@@ -4,8 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Eco-Desafío Ciudadano - CEBAS</title>
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome para íconos -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
@@ -17,10 +20,10 @@
             min-height: 100vh;
             -webkit-tap-highlight-color: transparent;
         }
-        .bin-btn, .choice-btn {
+        .bin-btn, .choice-btn, .menu-btn {
             transition: transform 0.1s, box-shadow 0.1s;
         }
-        .bin-btn:active, .choice-btn:active {
+        .bin-btn:active, .choice-btn:active, .menu-btn:active {
             transform: scale(0.97);
         }
         .progress-bar {
@@ -42,6 +45,7 @@
 
     <div id="game-card" class="w-full max-w-md bg-white rounded-3xl shadow-xl overflow-hidden flex flex-col min-h-[95vh] border border-slate-100">
         
+        <!-- HEADER -->
         <header class="bg-gradient-to-r from-emerald-700 to-teal-800 p-4 text-white text-center shadow-md relative">
             <button id="btn-abandonar" onclick="solicitarSalir()" class="absolute top-3 right-3 bg-black/20 hover:bg-black/40 text-[10px] font-bold px-2.5 py-1 rounded-lg flex items-center space-x-1 transition duration-150">
                 <i class="fa-solid fa-arrow-right-from-bracket text-[9px]"></i>
@@ -63,27 +67,46 @@
             </div>
         </header>
 
+        <!-- BARRA DE PROGRESO -->
         <div class="w-full h-2 bg-slate-100 relative">
             <div id="progress-bar" class="h-full bg-gradient-to-r from-emerald-500 to-teal-500 progress-bar" style="width: 0%"></div>
         </div>
 
+        <!-- CONTENIDO PRINCIPAL -->
         <main id="main-content" class="flex-grow p-4 flex flex-col justify-between items-center bg-white">
             
-            <section id="screen-welcome" class="w-full text-center my-auto space-y-5 flex flex-col items-center">
-                <div class="w-full max-w-[200px] rounded-xl overflow-hidden shadow-xs border border-slate-200 bg-white p-2">
+            <!-- BIENVENIDA -->
+            <section id="screen-welcome" class="w-full text-center my-auto space-y-4 flex flex-col items-center">
+                <div class="w-full max-w-[160px] rounded-xl overflow-hidden shadow-xs border border-slate-200 bg-white p-2">
                     <img id="logo-welcome" src="LogoCebas.jpeg" class="w-full h-auto block mx-auto rounded-lg" alt="Logo CEBAS 19">
                 </div>
-                <div class="space-y-2">
+                <div class="space-y-1">
                     <h2 class="text-2xl font-black text-slate-800">¡Cuidemos Nuestro Barrio!</h2>
-                    <p class="text-sm text-slate-600 leading-relaxed px-1">
-                        Clasificaremos <strong>12 residuos con fotografías reales</strong> en sus contenedores oficiales, y luego responderemos <strong>10 preguntas</strong> sobre salud y entorno.
+                    <p class="text-xs text-slate-600 leading-relaxed px-1">
+                        Elegí cómo querés participar hoy para repasar las pautas de salud y entorno ambiental.
                     </p>
                 </div>
-                <button onclick="startPhase1()" class="w-full py-4 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-lg rounded-2xl shadow-lg transition duration-200">
-                    Comenzar Juego
-                </button>
+                
+                <!-- MENÚ DE 3 OPCIONES -->
+                <div class="w-full flex flex-col space-y-2.5 pt-2">
+                    <button onclick="startGameMode('completo')" class="menu-btn w-full py-3.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-base rounded-2xl shadow-md flex items-center justify-center space-x-2">
+                        <i class="fa-solid fa-play text-sm"></i>
+                        <span>Juego Completo (Ambos)</span>
+                    </button>
+                    
+                    <button onclick="startGameMode('fotos')" class="menu-btn w-full py-3 bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold text-sm rounded-xl border border-slate-200 flex items-center justify-center space-x-2">
+                        <i class="fa-solid fa-camera text-emerald-600"></i>
+                        <span>Solo Clasificar Fotos (12)</span>
+                    </button>
+                    
+                    <button onclick="startGameMode('trivia')" class="menu-btn w-full py-3 bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold text-sm rounded-xl border border-slate-200 flex items-center justify-center space-x-2">
+                        <i class="fa-solid fa-lightbulb text-indigo-600"></i>
+                        <span>Solo Trivia de Preguntas (10)</span>
+                    </button>
+                </div>
             </section>
 
+            <!-- FASE 1: CLASIFICACIÓN -->
             <section id="screen-p1" class="w-full hidden flex flex-col flex-grow justify-between space-y-3">
                 <div class="text-center">
                     <span id="p1-counter" class="bg-slate-100 text-slate-700 text-xs font-extrabold uppercase px-3 py-1 rounded-full">Residuo 1 de 12</span>
@@ -129,6 +152,7 @@
                 </div>
             </section>
 
+            <!-- FASE 2: TRIVIA -->
             <section id="screen-p2" class="w-full hidden flex flex-col flex-grow justify-between space-y-3">
                 <div class="text-center">
                     <span id="p2-counter" class="bg-indigo-100 text-indigo-700 text-xs font-extrabold uppercase px-3 py-1 rounded-full">Pregunta 1 de 10</span>
@@ -143,19 +167,20 @@
                 <div id="p2-options" class="w-full flex flex-col space-y-2"></div>
             </section>
 
+            <!-- PANTALLA REPORTE FINAL -->
             <section id="screen-results" class="w-full hidden text-center space-y-5 my-auto px-1 flex flex-col items-center">
-                <div class="w-full max-w-[130px] rounded-xl overflow-hidden shadow-xs border border-slate-200 bg-white p-1">
+                <div class="w-full max-w-[120px] rounded-xl overflow-hidden shadow-xs border border-slate-200 bg-white p-1">
                     <img id="logo-results" src="LogoCebas.jpeg" class="w-full h-auto block mx-auto rounded-lg" alt="Logo CEBAS 19 Cierre">
                 </div>
                 
                 <div class="space-y-2">
                     <h2 id="final-title" class="text-3xl font-black text-slate-900 tracking-tight">¡Gran Logro!</h2>
-                    <p id="final-desc" class="text-base md:text-lg text-slate-700 font-medium leading-relaxed bg-emerald-50/60 p-4 rounded-2xl border border-emerald-100 shadow-xs text-left"></p>
+                    <p id="final-desc" class="text-sm text-slate-700 font-medium leading-relaxed bg-emerald-50/60 p-4 rounded-2xl border border-emerald-100 shadow-xs text-left"></p>
                 </div>
 
                 <div class="w-full bg-slate-50 p-4 rounded-2xl border border-slate-100 text-left space-y-2 text-sm font-bold text-slate-700 shadow-inner">
-                    <p><i class="fa-solid fa-circle-check text-emerald-600 mr-2"></i> Clasificaciones correctas: <span id="final-correct" class="text-emerald-600">0/12</span></p>
-                    <p><i class="fa-solid fa-circle-question text-indigo-600 mr-2"></i> Trivia respondida: <span id="final-trivia" class="text-indigo-600">0/10</span></p>
+                    <p id="result-row-p1"><i class="fa-solid fa-circle-check text-emerald-600 mr-2"></i> Clasificaciones correctas: <span id="final-correct" class="text-emerald-600">0/12</span></p>
+                    <p id="result-row-p2"><i class="fa-solid fa-circle-question text-indigo-600 mr-2"></i> Trivia respondida: <span id="final-trivia" class="text-indigo-600">0/10</span></p>
                     <p><i class="fa-solid fa-heart-pulse text-rose-600 mr-2"></i> Salud Comunitaria Lograda: <span id="final-points" class="text-rose-600">0%</span></p>
                 </div>
 
@@ -167,8 +192,9 @@
 
         </main>
 
+        <!-- FOOTER -->
         <footer class="bg-slate-100 border-t border-slate-200 px-4 py-3.5 text-center text-[11px] text-slate-900 font-black tracking-wide uppercase">
-            © Prof. Mariela L. Loza. Todos los derechos reservados. Versión 1.0 - 2026.
+            © Prof. Mariela L. Loza. Todos los derechos reservados. Versión 1.1 - 2026.
         </footer>
 
     </div>
@@ -193,11 +219,10 @@
             }
         }
 
-        // BASE DE DATOS CONFIGURADA CON TUS ARCHIVOS LOCALES BAJADOS
         const phase1Database = [
             { name: "Botella de Plástico Vacía", bin: "amarillo", image: "R1-botellas.jpg", message: "¡Correcto! Las botellas plásticas van al AMARILLO. Así evitamos que tarden 500 años en degradarse en los basurales." },
             { name: "Latas de Metal y Aluminio", bin: "amarillo", image: "R2-metal.jpg", message: "¡Muy bien! Latas y metales van al AMARILLO. Su reutilización evita la explotación minera a cielo abierto." },
-            { name: "Cajas de Cartón Limpias", bin: "naranja", image: "R3-cajas.jpg", message: "¡Excelente! El cartón seco va al NARANJA, permitiendo recuperar celulosa y previniendo la deforestación." },
+            { name: "Cajas de Cartón Limpias", bin: "naranja", image: "R3-cajas.jpg", message: "¡Excelente! El cartón seco va al NARANJA, permitiendo recuperar celulosa y previnieningo la deforestación." },
             { name: "Revistas y Diarios Viejos", bin: "naranja", image: "R4-diarios.jpg", message: "¡Perfecto! Los papeles secos van al NARANJA. Si están húmedos o con aceite, deben descartarse en el negro." },
             { name: "Frasco de Vidrio Sano", bin: "verde", image: "R5-frasco.jpg", message: "¡Espectacular! El vidrio va al VERDE. Se funde infinitas veces sin perder jamás sus propiedades de higiene." },
             { name: "Pilas y Baterías Usadas", bin: "rojo", image: "R6-pilas.jpg", message: "¡Esencial! Las pilas van al ROJO por su alta toxicidad química. Previene que metales pesados envenenen el agua del barrio." },
@@ -209,7 +234,6 @@
             { name: "Espejo Roto o Cerámicas", bin: "negro", image: "R12-ceramica.jpg", message: "¡Bien pensado! Cristales de espejos y cerámicas van al NEGRO porque dañan el proceso de reciclado del vidrio común." }
         ];
 
-        // FASE 2: TRIVIA MULTIPLE CHOICE ORIGINAL
         const phase2Database = [
             { q: "¿Por qué es clave limpiar los plásticos antes de reciclarlos?", c: ["Para que pesen menos", "Para que no pudran ni contaminen otros materiales secos", "Para usar más agua de la canilla"], a: 1, m: "Los restos de comida pudren el lote completo de reciclaje, obligando a tirarlo a la basura." },
             { q: "¿Qué peligro básico causan las pilas tiradas en la tierra común?", c: ["Atraen rayos solares", "Contaminan las napas de agua subterránea que consume la gente", "Hacen crecer pasto azul"], a: 1, m: "Una sola pila de reloj puede contaminar miles de litros de agua comunitaria por décadas." },
@@ -217,15 +241,15 @@
             { q: "Si quemamos basura en el fondo de casa, ¿qué impacto directo tiene?", c: ["Limpia las impurezas del suelo", "Libera gases tóxicos que dañan las vías respiratorias de los vecinos", "Mejora el clima de la cuadra"], a: 1, m: "El humo de basura quemada contiene dioxinas que afectan gravemente los pulmones de niños y abuelos." },
             { q: "¿Qué sucede con una colilla de cigarrillo tirada en la vereda?", c: ["Se disuelve con el sol en un día", "Es absorbida por las plantas como abono", "Contamina hasta 50 litros de agua al llegar a las alcantarillas"], a: 2, m: "Las colillas concentran nicotina y alquitrán que envenenan los cursos fluviales urbanos." },
             { q: "¿Por qué los desechos patogénicos como gasas van al contenedor ROJO?", c: ["Para diferenciarlos por estética", "Para evitar la propagación de virus, bacterias y proteger al recolector", "Porque el rojo brilla de noche"], a: 1, m: "La gestión segura de residuos de salud frena brotes infecciosos en los barrios comunitarios." },
-            { q: "¿Cuál es la forma ideal de colaborar con los recuperadores urbanos (cartoneros)?", c: ["Entregar los materiales secos, limpios y ordenados en la mano o bolsa verde", "Mezclar todo en bolsas negras cerradas", "Dejar los vidrios rotos sueltos"], a: 0, m: "Facilita su trabajo digno, previene que se corten las manos y acelera la cadena sustentable." },
+            { q: "Cuál es la forma ideal de colaborar con los recuperadores urbanos (cartoneros)?", c: ["Entregar los materiales secos, limpios y ordenados en la mano o bolsa verde", "Mezclar todo en bolsas negras cerradas", "Dejar los vidrios rotos sueltos"], a: 0, m: "Facilita su trabajo digno, previene que se corten las manos y acelera la cadena sustentable." },
             { q: "¿Qué problema sanitario directo causa acumular neumáticos o cacharros con agua?", c: ["Genera cortocircuitos eléctricos", "Favorece el criadero del mosquito Aedes aegypti (Dengue)", "Arruina la visual del vecindario"], a: 1, m: "El descacharreo y reciclaje de plásticos elimina los reservorios donde se reproduce el Dengue." },
-            { q: "Si hablando de separar residuos, ¿qué significa el concepto 'Separación en Origen'?", c: ["Llevar la basura a su país de origen", "Clasificar los materiales justo en el lugar donde se generan (el hogar)", "Comprar productos importados"], a: 1, m: "El cambio real empieza en la cocina de cada hogar, dividiendo lo útil de lo inservible." },
+            { q: "Si hablando de separar residuos, ¿qué significa el concept 'Separación en Origen'?", c: ["Llevar la basura a su país de origen", "Clasificar los materiales justo en el lugar donde se generan (el hogar)", "Comprar productos importados"], a: 1, m: "El cambio real empieza en la cocina de cada hogar, dividiendo lo útil de lo inservible." },
             { q: "¿Qué impacto positivo genera el reciclaje de aluminio en comparación con extraerlo de la tierra?", c: ["Ahorra hasta un 95% de energía y disminuye la polución industrial", "Hace que el metal sea transparente", "No altera en nada los costos"], a: 0, m: "Reciclar latas reduce drásticamente las emisiones de carbono globales y locales." }
         ];
 
         let currentP1Idx = 0; let currentP2Idx = 0; scoreEco = 0; scoreHealth = 0; p1Correct = 0; p2Correct = 0; isProcessing = false;
+        let gameMode = 'completo'; // 'completo', 'fotos', 'trivia'
 
-        // Forzar recarga de imágenes locales al cambiar de residuo
         function updateStats() {
             document.getElementById('stat-eco').innerText = scoreEco + "%";
             document.getElementById('stat-health').innerText = scoreHealth + "%";
@@ -235,22 +259,36 @@
             if (confirm("¿Estás seguro de que querés abandonar? Perderás tu progreso.")) { exitGame(); }
         }
 
-        function startPhase1() {
+        function startGameMode(mode) {
+            gameMode = mode;
             document.getElementById('screen-welcome').classList.add('hidden');
-            document.getElementById('screen-p1').classList.remove('hidden');
-            document.getElementById('game-phase-title').innerText = "Fase 1: Clasificación de Residuos";
-            loadResidue();
+            
+            if (mode === 'completo' || mode === 'fotos') {
+                document.getElementById('screen-p1').classList.remove('hidden');
+                document.getElementById('game-phase-title').innerText = "Fase 1: Clasificación de Residuos";
+                loadResidue();
+            } else if (mode === 'trivia') {
+                document.getElementById('screen-p2').classList.remove('hidden');
+                document.getElementById('game-phase-title').innerText = "Fase 2: Trivia del Impacto Sanitario";
+                loadQuestion();
+            }
         }
 
         function loadResidue() {
-            if (currentP1Idx >= phase1Database.length) { startPhase2(); return; }
+            if (currentP1Idx >= phase1Database.length) { 
+                if (gameMode === 'completo') { startPhase2(); } else { showFinalResults(); }
+                return; 
+            }
             isProcessing = false;
             const res = phase1Database[currentP1Idx];
             document.getElementById('p1-counter').innerText = `Residuo ${currentP1Idx + 1} de ${phase1Database.length}`;
             document.getElementById('residue-name').innerText = res.name;
             document.getElementById('residue-image').src = res.image;
             document.getElementById('p1-feedback').classList.add('hidden');
-            document.getElementById('progress-bar').style.width = `${(currentP1Idx / (phase1Database.length + phase2Database.length)) * 100}%`;
+            
+            // Ajuste de barra de progreso según modo
+            let maxSteps = gameMode === 'completo' ? (phase1Database.length + phase2Database.length) : phase1Database.length;
+            document.getElementById('progress-bar').style.width = `${(currentP1Idx / maxSteps) * 100}%`;
         }
 
         function selectBin(chosenBin) {
@@ -260,15 +298,24 @@
             const card = document.getElementById('game-card');
             panel.classList.remove('hidden'); panel.innerText = res.message;
 
+            // Factor de puntos varía si es modo único para llegar al 100%
+            let pointsFactor = gameMode === 'fotos' ? 8.4 : 4;
+
             if (chosenBin === res.bin) {
-                playBeep('success'); p1Correct++; scoreEco = Math.min(100, scoreEco + 4); scoreHealth = Math.min(100, scoreHealth + 4);
+                playBeep('success'); p1Correct++; 
+                scoreEco = Math.min(100, scoreEco + pointsFactor); 
+                scoreHealth = Math.min(100, scoreHealth + pointsFactor);
                 panel.className = "p-2.5 rounded-xl border text-center text-xs font-bold bg-green-50 border-green-200 text-green-800";
                 card.classList.add('flash-success');
             } else {
-                playBeep('error'); scoreEco = Math.max(0, scoreEco - 4); scoreHealth = Math.max(0, scoreHealth - 4);
+                playBeep('error'); 
+                scoreEco = Math.max(0, scoreEco - pointsFactor); 
+                scoreHealth = Math.max(0, scoreHealth - pointsFactor);
                 panel.className = "p-2.5 rounded-xl border text-center text-xs font-bold bg-rose-50 border-rose-200 text-rose-800";
                 card.classList.add('flash-error');
             }
+            // Redondear para evitar decimales molestos visualmente
+            scoreEco = Math.round(scoreEco); scoreHealth = Math.round(scoreHealth);
             updateStats();
             setTimeout(() => { card.classList.remove('flash-success', 'flash-error'); currentP1Idx++; loadResidue(); }, 3500);
         }
@@ -287,7 +334,14 @@
             document.getElementById('p2-counter').innerText = `Pregunta ${currentP2Idx + 1} de ${phase2Database.length}`;
             document.getElementById('p2-question').innerText = qData.q;
             document.getElementById('p2-feedback').classList.add('hidden');
-            const totalProgress = ((phase1Database.length + currentP2Idx) / (phase1Database.length + phase2Database.length)) * 100;
+            
+            // Ajuste de barra de progreso según modo
+            let totalProgress = 0;
+            if (gameMode === 'completo') {
+                totalProgress = ((phase1Database.length + currentP2Idx) / (phase1Database.length + phase2Database.length)) * 100;
+            } else {
+                totalProgress = (currentP2Idx / phase2Database.length) * 100;
+            }
             document.getElementById('progress-bar').style.width = `${totalProgress}%`;
 
             const optionsContainer = document.getElementById('p2-options'); optionsContainer.innerHTML = "";
@@ -308,13 +362,19 @@
             const optionButtons = document.getElementById('p2-options').children;
             panel.classList.remove('hidden'); panel.innerText = qData.m;
 
+            let pointsFactor = gameMode === 'trivia' ? 10 : 5;
+
             if (chosenIdx === qData.a) {
-                playBeep('success'); p2Correct++; scoreEco = Math.min(100, scoreEco + 5); scoreHealth = Math.min(100, scoreHealth + 5);
+                playBeep('success'); p2Correct++; 
+                scoreEco = Math.min(100, scoreEco + pointsFactor); 
+                scoreHealth = Math.min(100, scoreHealth + pointsFactor);
                 panel.className = "p-2.5 rounded-xl border text-center text-xs font-bold bg-green-50 border-green-200 text-green-800";
                 optionButtons[chosenIdx].className = "choice-btn w-full p-3 bg-green-100 border border-green-300 text-green-800 text-xs font-bold rounded-xl text-left flex items-start space-x-2";
                 card.classList.add('flash-success');
             } else {
-                playBeep('error'); scoreEco = Math.max(0, scoreEco - 5); scoreHealth = Math.max(0, scoreHealth - 5);
+                playBeep('error'); 
+                scoreEco = Math.max(0, scoreEco - pointsFactor); 
+                scoreHealth = Math.max(0, scoreHealth - pointsFactor);
                 panel.className = "p-2.5 rounded-xl border text-center text-xs font-bold bg-rose-50 border-rose-200 text-rose-800";
                 optionButtons[chosenIdx].className = "choice-btn w-full p-3 bg-rose-100 border border-rose-300 text-rose-700 text-xs font-bold rounded-xl text-left flex items-start space-x-2";
                 optionButtons[qData.a].className = "choice-btn w-full p-3 bg-green-50 border border-green-200 text-green-800 text-xs font-bold rounded-xl text-left flex items-start space-x-2";
@@ -325,25 +385,42 @@
         }
 
         function showFinalResults() {
+            document.getElementById('screen-p1').classList.add('hidden');
             document.getElementById('screen-p2').classList.add('hidden');
             document.getElementById('screen-results').classList.remove('hidden');
             document.getElementById('game-phase-title').innerText = "Desafío Finalizado";
+            
             const finalTitle = document.getElementById('final-title');
             const finalDesc = document.getElementById('final-desc');
-            document.getElementById('final-correct').innerText = `${p1Correct} / 12`;
-            document.getElementById('final-trivia').innerText = `${p2Correct} / 10`;
+            
+            // Mostrar u ocultar filas de resultados según qué se jugó
+            const rowP1 = document.getElementById('result-row-p1');
+            const rowP2 = document.getElementById('result-row-p2');
+            
+            if (gameMode === 'fotos') {
+                rowP1.classList.remove('hidden'); rowP2.classList.add('hidden');
+                document.getElementById('final-correct').innerText = `${p1Correct} / 12`;
+            } else if (gameMode === 'trivia') {
+                rowP1.classList.add('hidden'); rowP2.classList.remove('hidden');
+                document.getElementById('final-trivia').innerText = `${p2Correct} / 10`;
+            } else {
+                rowP1.classList.remove('hidden'); rowP2.classList.remove('hidden');
+                document.getElementById('final-correct').innerText = `${p1Correct} / 12`;
+                document.getElementById('final-trivia').innerText = `${p2Correct} / 10`;
+            }
+
             const generalAvg = Math.round((scoreEco + scoreHealth) / 2);
             document.getElementById('final-points').innerText = `${generalAvg}%`;
 
             if (generalAvg >= 75) {
                 finalTitle.innerText = "¡Líder Ambiental!";
-                finalDesc.innerText = "¡Qué excelente trabajo hiciste por la comunidad! Lograste una gestión de excelencia clasificando los residuos y demostraste un gran conocimiento sanitario.";
+                finalDesc.innerText = "¡Qué excelente trabajo por la comunidad! Lograste una gestión de excelencia y demostraste un gran compromiso con la salud del barrio.";
             } else if (generalAvg >= 45) {
                 finalTitle.innerText = "¡Buen Esfuerzo!";
-                finalDesc.innerText = "¡Vas por un gran camino vecinal! Lograste salvar valiosos materiales y acertaste pautas claves sobre el Dengue y la quema de basura.";
+                finalDesc.innerText = "¡Vas por un gran camino vecinal! Lograste aprender pautas claves sobre reciclaje, prevención de Dengue y quema de basura.";
             } else {
                 finalTitle.innerText = "Alerta Vecinal";
-                finalDesc.innerText = "La mezcla inapropiada de elementos químicos o patogénicos arriesga la salubridad de las familias. ¡Volvamos a intentar!";
+                finalDesc.innerText = "La mezcla inapropiada de elementos o la falta de pautas sanitarias arriesga la cuadra. ¡Volvamos a intentar!";
             }
         }
 
@@ -351,6 +428,7 @@
             document.getElementById('screen-results').classList.add('hidden');
             document.getElementById('screen-welcome').classList.remove('hidden');
             currentP1Idx = 0; currentP2Idx = 0; scoreEco = 0; scoreHealth = 0; p1Correct = 0; p2Correct = 0; updateStats();
+            document.getElementById('progress-bar').style.width = `0%`;
         }
 
         function exitGame() { window.location.href = "https://www.google.com.ar"; }
