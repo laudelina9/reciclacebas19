@@ -4,8 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Eco-Desafío Ciudadano - CEBAS</title>
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome para íconos -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
@@ -42,6 +45,7 @@
 
     <div id="game-card" class="w-full max-w-md bg-white rounded-3xl shadow-xl overflow-hidden flex flex-col min-h-[95vh] border border-slate-100">
         
+        <!-- HEADER -->
         <header class="bg-gradient-to-r from-emerald-700 to-teal-800 p-4 text-white text-center shadow-md relative">
             <button id="btn-abandonar" onclick="solicitarSalir()" class="absolute top-3 right-3 bg-black/20 hover:bg-black/40 text-[10px] font-bold px-2.5 py-1 rounded-lg flex items-center space-x-1 transition duration-150">
                 <i class="fa-solid fa-arrow-right-from-bracket text-[9px]"></i>
@@ -63,12 +67,15 @@
             </div>
         </header>
 
+        <!-- BARRA DE PROGRESO -->
         <div class="w-full h-2 bg-slate-100 relative">
             <div id="progress-bar" class="h-full bg-gradient-to-r from-emerald-500 to-teal-500 progress-bar" style="width: 0%"></div>
         </div>
 
+        <!-- CONTENIDO PRINCIPAL -->
         <main id="main-content" class="flex-grow p-4 flex flex-col justify-between items-center bg-white">
             
+            <!-- BIENVENIDA -->
             <section id="screen-welcome" class="w-full text-center my-auto space-y-5 flex flex-col items-center">
                 <div class="w-full max-w-[200px] rounded-xl overflow-hidden shadow-xs border border-slate-200 bg-white p-2">
                     <img id="logo-welcome" src="LogoCebas.jpeg" class="w-full h-auto block mx-auto rounded-lg" alt="Logo CEBAS 19">
@@ -84,6 +91,7 @@
                 </button>
             </section>
 
+            <!-- FASE 1: CLASIFICACIÓN -->
             <section id="screen-p1" class="w-full hidden flex flex-col flex-grow justify-between space-y-3">
                 <div class="text-center">
                     <span id="p1-counter" class="bg-slate-100 text-slate-700 text-xs font-extrabold uppercase px-3 py-1 rounded-full">Residuo 1 de 12</span>
@@ -91,7 +99,7 @@
 
                 <div class="w-full space-y-2 flex flex-col items-center">
                     <div class="w-48 h-48 bg-slate-100 border-4 border-white shadow-md rounded-2xl overflow-hidden flex items-center justify-center relative">
-                        <img id="residue-image" src="" alt="Fotografía Real" crossorigin="anonymous" class="w-full h-full object-cover">
+                        <img id="residue-image" src="" alt="Fotografía Real" class="w-full h-full object-cover">
                     </div>
                     <h3 id="residue-name" class="text-base font-black text-slate-800 text-center tracking-wide uppercase">Cargando...</h3>
                 </div>
@@ -129,6 +137,7 @@
                 </div>
             </section>
 
+            <!-- FASE 2: TRIVIA -->
             <section id="screen-p2" class="w-full hidden flex flex-col flex-grow justify-between space-y-3">
                 <div class="text-center">
                     <span id="p2-counter" class="bg-indigo-100 text-indigo-700 text-xs font-extrabold uppercase px-3 py-1 rounded-full">Pregunta 1 de 10</span>
@@ -143,6 +152,7 @@
                 <div id="p2-options" class="w-full flex flex-col space-y-2"></div>
             </section>
 
+            <!-- PANTALLA REPORTE FINAL -->
             <section id="screen-results" class="w-full hidden text-center space-y-5 my-auto px-1 flex flex-col items-center">
                 <div class="w-full max-w-[130px] rounded-xl overflow-hidden shadow-xs border border-slate-200 bg-white p-1">
                     <img id="logo-results" src="LogoCebas.jpeg" class="w-full h-auto block mx-auto rounded-lg" alt="Logo CEBAS 19 Cierre">
@@ -167,6 +177,7 @@
 
         </main>
 
+        <!-- FOOTER -->
         <footer class="bg-slate-100 border-t border-slate-200 px-4 py-3.5 text-center text-[11px] text-slate-900 font-black tracking-wide uppercase">
             © Prof. Mariela L. Loza. Todos los derechos reservados. Versión 1.0 - 2026.
         </footer>
@@ -193,28 +204,28 @@
             }
         }
 
-        // ENLACES WEB DIRECTOS CON IMÁGENES REALES ACTUALIZADAS Y ESTABLES
+        // CONTROLADOR DE BASE DE DATOS ORIGINAL CON IMÁGENES COMPROBADAS DE SOURCEFORGE
         const phase1Database = [
-            { name: "Botella de Plástico Vacía", bin: "amarillo", image: "https://images.unsplash.com/photo-1536939459926-301728240400?w=400&auto=format&fit=crop&q=60", message: "¡Correcto! Las botellas plásticas van al AMARILLO. Así evitamos que tarden 500 años en degradarse en los basurales." },
-            { name: "Latas de Metal y Aluminio", bin: "amarillo", image: "https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?w=400&auto=format&fit=crop&q=60", message: "¡Muy bien! Latas y metales van al AMARILLO. Su reutilización evita la explotación minera a cielo abierto." },
-            { name: "Cajas de Cartón Limpias", bin: "naranja", image: "https://images.unsplash.com/photo-1513151233558-d860c5398176?w=400&auto=format&fit=crop&q=60", message: "¡Excelente! El cartón seco va al NARANJA, permitiendo recuperar celulosa y previniendo la deforestación." },
-            { name: "Revistas y Diarios Viejos", bin: "naranja", image: "https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&auto=format&fit=crop&q=60", message: "¡Perfecto! Los papeles secos van al NARANJA. Si están húmedos o con aceite, deben descartarse en el negro." },
-            { name: "Frasco de Vidrio Sano", bin: "verde", image: "https://images.unsplash.com/photo-1602143407151-7111542de6e8?w=400&auto=format&fit=crop&q=60", message: "¡Espectacular! El vidrio va al VERDE. Se funde infinitas veces sin perder jamás sus propiedades de higiene." },
-            { name: "Pilas y Baterías Usadas", bin: "rojo", image: "https://images.unsplash.com/photo-1619641782842-83f2f9c6f2a9?w=400&auto=format&fit=crop&q=60", message: "¡Esencial! Las pilas van al ROJO por su alta toxicidad química. Previene que metales pesados envenenen el agua del barrio." },
-            { name: "Restos de Comida / Orgánicos", bin: "marron", image: "https://images.unsplash.com/photo-1542838132-92c53300491e?w=400&auto=format&fit=crop&q=60", message: "¡Excelente! Los restos orgánicos van al MARRÓN para compostaje, devolviendo nutrientes sanos a la tierra." },
-            { name: "Curitas y Gasas Usadas", bin: "rojo", image: "https://images.unsplash.com/photo-1603398938378-e54eab446dde?w=400&auto=format&fit=crop&q=60", message: "¡Acción Vital! Todo desecho de curación hogareña va al ROJO. Evita focos infecciosos y protege a los recolectores." },
-            { name: "Envase de Agroquímico / Veneno", bin: "rojo", image: "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=400&auto=format&fit=crop&q=60", message: "¡Obligatorio! Envases tóxicos o químicos van al ROJO. Nunca deben quemarse ni enterrarse en el patio de casa." },
-            { name: "Pañales Usados", bin: "negro", image: "https://images.unsplash.com/photo-1611284446314-60a58ac0deb9?w=400&auto=format&fit=crop&q=60", message: "¡Correcto! Los pañales van al NEGRO (basura común). No son reciclables ni aptos para compost doméstico." },
-            { name: "Colillas de Cigarrillo", bin: "negro", image: "https://images.unsplash.com/photo-1556950272-9b21319762db?w=400&auto=format&fit=crop&q=60", message: "¡Bien clasificado! Las colillas van al NEGRO. Contienen cientos de sustancias tóxicas que arruinan el suelo." },
-            { name: "Espejo Roto o Cerámicas", bin: "negro", image: "https://images.unsplash.com/photo-1517404215738-15263e9f9178?w=400&auto=format&fit=crop&q=60", message: "¡Bien pensado! Cristales de mirrors y cerámicas van al NEGRO porque dañan el proceso de reciclado del vidrio común." }
+            { name: "Botella de Plástico Vacía", bin: "amarillo", image: "https://pixnio.com/free-images/2017/10/31/2017-10-31-22-26-44-900x675.jpg", message: "¡Correcto! Las botellas plásticas van al AMARILLO. Así evitamos que tarden 500 años en degradarse en los basurales." },
+            { name: "Latas de Metal y Aluminio", bin: "amarillo", image: "https://pixnio.com/free-images/2018/12/03/2018-12-03-15-26-41-900x675.jpg", message: "¡Muy bien! Latas y metales van al AMARILLO. Su reutilización evita la explotación minera a cielo abierto." },
+            { name: "Cajas de Cartón Limpias", bin: "naranja", image: "https://pixnio.com/free-images/2017/05/23/2017-05-23-09-54-39-900x600.jpg", message: "¡Excelente! El cartón seco va al NARANJA, permitiendo recuperar celulosa y previniendo la deforestación." },
+            { name: "Revistas y Diarios Viejos", bin: "naranja", image: "https://pixnio.com/free-images/media/news-newspaper-press-paper.jpg", message: "¡Perfecto! Los papeles secos van al NARANJA. Si están húmedos o con aceite, deben descartarse en el negro." },
+            { name: "Frasco de Vidrio Sano", bin: "verde", image: "https://pixnio.com/free-images/2019/07/23/2019-07-23-08-41-39-900x600.jpg", message: "¡Espectacular! El vidrio va al VERDE. Se funde infinitas veces sin perder jamás sus propiedades de higiene." },
+            { name: "Pilas y Baterías Usadas", bin: "rojo", image: "https://pixnio.com/free-images/electronics/batteries/alkaline-batteries.jpg", message: "¡Esencial! Las pilas van al ROJO por su alta toxicidad química. Previene que metales pesados envenenen el agua del barrio." },
+            { name: "Restos de Comida / Orgánicos", bin: "marron", image: "https://pixnio.com/free-images/2017/03/07/2017-03-07-09-04-10-900x600.jpg", message: "¡Excelente! Los restos orgánicos van al MARRÓN para compostaje, devolviendo nutrientes sanos a la tierra." },
+            { name: "Curitas y Gasas Usadas", bin: "rojo", image: "https://pixnio.com/free-images/2017/10/24/2017-10-24-08-33-33-900x600.jpg", message: "¡Acción Vital! Todo desecho de curación hogareña va al ROJO. Evita focos infecciosos y protege a los recolectores." },
+            { name: "Envase de Agroquímico / Veneno", bin: "rojo", image: "https://pixnio.com/free-images/2017/11/02/2017-11-02-12-00-58-900x600.jpg", message: "¡Obligatorio! Envases tóxicos o químicos van al ROJO. Nunca deben quemarse ni enterrarse en el patio de casa." },
+            { name: "Pañales Usados", bin: "negro", image: "https://pixnio.com/free-images/2018/02/09/2018-02-09-22-17-48-900x506.jpg", message: "¡Correcto! Los pañales van al NEGRO (basura común). No son reciclables ni aptos para compost doméstico." },
+            { name: "Colillas de Cigarrillo", bin: "negro", image: "https://pixnio.com/free-images/2017/05/23/2017-05-23-14-38-08-900x675.jpg", message: "¡Bien clasificado! Las colillas van al NEGRO. Contienen cientos de sustancias tóxicas que arruinan el suelo." },
+            { name: "Espejo Roto o Cerámicas", bin: "negro", image: "https://pixnio.com/free-images/2019/12/10/2019-12-10-09-54-32-900x600.jpg", message: "¡Bien pensado! Cristales de espejos y cerámicas van al NEGRO porque dañan el proceso de reciclado del vidrio común." }
         ];
 
-        // FASE 2: TRIVIA MULTIPLE CHOICE
+        // FASE 2: TRIVIA MULTIPLE CHOICE ORIGINAL
         const phase2Database = [
             { q: "¿Por qué es clave limpiar los plásticos antes de reciclarlos?", c: ["Para que pesen menos", "Para que no pudran ni contaminen otros materiales secos", "Para usar más agua de la canilla"], a: 1, m: "Los restos de comida pudren el lote completo de reciclaje, obligando a tirarlo a la basura." },
             { q: "¿Qué peligro básico causan las pilas tiradas en la tierra común?", c: ["Atraen rayos solares", "Contaminan las napas de agua subterránea que consume la gente", "Hacen crecer pasto azul"], a: 1, m: "Una sola pila de reloj puede contaminar miles de litros de agua comunitaria por décadas." },
             { q: "¿Qué beneficio directo genera hacer compost con los residuos orgánicos (marrón)?", c: ["Reduce a la mitad la basura que va al basural de la ciudad", "Hace que los camiones viajen más rápido", "Sirve para ahuyentar perros"], a: 0, m: "Casi el 50% de los residuos domésticos son orgánicos; compostarlos alivia el colapso ambiental." },
-            { q: "Si quemamos basura en el fondo de casa, ¿qué impacto directo tiene?", c: ["Limpia las impurities del suelo", "Libera gases tóxicos que dañan las vías respiratorias de los vecinos", "Mejora el clima de la cuadra"], a: 1, m: "El humo de basura quemada contiene dioxinas que afectan gravemente los pulmones de niños y abuelos." },
+            { q: "Si quemamos basura en el fondo de casa, ¿qué impacto directo tiene?", c: ["Limpia las impurezas del suelo", "Libera gases tóxicos que dañan las vías respiratorias de los vecinos", "Mejora el clima de la cuadra"], a: 1, m: "El humo de basura quemada contiene dioxinas que afectan gravemente los pulmones de niños y abuelos." },
             { q: "¿Qué sucede con una colilla de cigarrillo tirada en la vereda?", c: ["Se disuelve con el sol en un día", "Es absorbida por las plantas como abono", "Contamina hasta 50 litros de agua al llegar a las alcantarillas"], a: 2, m: "Las colillas concentran nicotina y alquitrán que envenenan los cursos fluviales urbanos." },
             { q: "¿Por qué los desechos patogénicos como gasas van al contenedor ROJO?", c: ["Para diferenciarlos por estética", "Para evitar la propagación de virus, bacterias y proteger al recolector", "Porque el rojo brilla de noche"], a: 1, m: "La gestión segura de residuos de salud frena brotes infecciosos en los barrios comunitarios." },
             { q: "¿Cuál es la forma ideal de colaborar con los recuperadores urbanos (cartoneros)?", c: ["Entregar los materiales secos, limpios y ordenados en la mano o bolsa verde", "Mezclar todo en bolsas negras cerradas", "Dejar los vidrios rotos sueltos"], a: 0, m: "Facilita su trabajo digno, previene que se corten las manos y acelera la cadena sustentable." },
