@@ -4,8 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Eco-Desafío Ciudadano Completo</title>
+    <!-- Tailwind CSS para diseño responsivo -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome para íconos complementarios -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
@@ -42,6 +45,7 @@
 
     <div id="game-card" class="w-full max-w-md bg-white rounded-3xl shadow-xl overflow-hidden flex flex-col min-h-[95vh] border border-slate-100">
         
+        <!-- HEADER: Indicadores de la Comunidad y Botón Abandonar -->
         <header class="bg-gradient-to-r from-emerald-700 to-teal-800 p-4 text-white text-center shadow-md relative">
             <button id="btn-abandonar" onclick="solicitarSalir()" class="absolute top-3 right-3 bg-black/20 hover:bg-black/40 text-[10px] font-bold px-2.5 py-1 rounded-lg flex items-center space-x-1 transition duration-150">
                 <i class="fa-solid fa-arrow-right-from-bracket text-[9px]"></i>
@@ -63,13 +67,17 @@
             </div>
         </header>
 
+        <!-- BARRA DE PROGRESO GLOBAL -->
         <div class="w-full h-2 bg-slate-100 relative">
             <div id="progress-bar" class="h-full bg-gradient-to-r from-emerald-500 to-teal-500 progress-bar" style="width: 0%"></div>
         </div>
 
+        <!-- CONTENIDO PRINCIPAL -->
         <main id="main-content" class="flex-grow p-4 flex flex-col justify-between items-center bg-white">
             
+            <!-- PANTALLA DE BIENVENIDA -->
             <section id="screen-welcome" class="w-full text-center my-auto space-y-5 flex flex-col items-center">
+                <!-- CONTENEDOR DEL LOGO INSTITUCIONAL -->
                 <div class="w-full max-w-[200px] rounded-xl overflow-hidden shadow-xs border border-slate-200 bg-white p-2">
                     <img id="logo-welcome" src="LogoCebas.jpeg" 
                          class="w-full h-auto block mx-auto rounded-lg" 
@@ -86,6 +94,7 @@
                 </button>
             </section>
 
+            <!-- PANTALLA FASE 1: CLASIFICACIÓN DE RESIDUOS -->
             <section id="screen-p1" class="w-full hidden flex flex-col flex-grow justify-between space-y-3">
                 <div class="text-center">
                     <span id="p1-counter" class="bg-slate-100 text-slate-700 text-xs font-extrabold uppercase px-3 py-1 rounded-full">Residuo 1 de 12</span>
@@ -131,6 +140,7 @@
                 </div>
             </section>
 
+            <!-- PANTALLA FASE 2: TRIVIA MULTIPLE CHOICE -->
             <section id="screen-p2" class="w-full hidden flex flex-col flex-grow justify-between space-y-3">
                 <div class="text-center">
                     <span id="p2-counter" class="bg-indigo-100 text-indigo-700 text-xs font-extrabold uppercase px-3 py-1 rounded-full">Pregunta 1 de 10</span>
@@ -143,10 +153,13 @@
                 <div id="p2-feedback" class="hidden p-2.5 rounded-xl border text-center text-xs font-semibold leading-relaxed"></div>
 
                 <div id="p2-options" class="w-full flex flex-col space-y-2">
-                    </div>
+                    <!-- Opciones inyectadas dinámicamente -->
+                </div>
             </section>
 
+            <!-- PANTALLA FINAL DE REPORTES -->
             <section id="screen-results" class="w-full hidden text-center space-y-5 my-auto px-1 flex flex-col items-center">
+                <!-- LOGO INSTITUCIONAL EN CIERRE -->
                 <div class="w-full max-w-[130px] rounded-xl overflow-hidden shadow-xs border border-slate-200 bg-white p-1">
                     <img id="logo-results" src="LogoCebas.jpeg" 
                          class="w-full h-auto block mx-auto rounded-lg" 
@@ -176,12 +189,14 @@
 
         </main>
 
+        <!-- FOOTER -->
         <footer class="bg-slate-100 border-t border-slate-200 px-4 py-3.5 text-center text-[11px] text-slate-900 font-black tracking-wide uppercase">
             © Prof. Mariela L. Loza. Todos los derechos reservados. Versión 1.0 - 2026.
         </footer>
 
     </div>
 
+    <!-- SCRIPT DE JUEGO INTEGRADO -->
     <script>
         // CONFIGURACIÓN DE AUDIO SINTETIZADO NATIVO
         const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -203,7 +218,7 @@
             }
         }
 
-        // FASE 1: FOTOS REALES DE RESIDUOS (IMÁGENES CORREGIDAS AL 100%)
+        // FASE 1: BANCO DE IMÁGENES CORREGIDO AL 100% (RESIDUOS 9 AL 12 CON ENLACES PRECISOS)
         const phase1Database = [
             { name: "Botella de Plástico Vacía", bin: "amarillo", image: "https://images.unsplash.com/photo-1523293182086-7651a899d37f?q=80&w=400&auto=format&fit=crop", message: "¡Correcto! Las botellas plásticas van al AMARILLO. Así evitamos que tarden 500 años en degradarse en los basurales." },
             { name: "Latas de Metal y Aluminio", bin: "amarillo", image: "https://images.unsplash.com/photo-1536657464919-892534f60d6e?q=80&w=400&auto=format&fit=crop", message: "¡Muy bien! Latas y metales van al AMARILLO. Su reutilización evita la explotación minera a cielo abierto." },
@@ -213,10 +228,10 @@
             { name: "Pilas y Baterías Usadas", bin: "rojo", image: "https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?q=80&w=400&auto=format&fit=crop", message: "¡Esencial! Las pilas van al ROJO por su alta toxicidad química. Previene que metales pesados envenenen el agua del barrio." },
             { name: "Restos de Comida / Orgánicos", bin: "marron", image: "https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=400&auto=format&fit=crop", message: "¡Excelente! Los restos orgánicos van al MARRÓN para compostaje, devolviendo nutrientes sanos a la tierra." },
             { name: "Curitas y Gasas Usadas", bin: "rojo", image: "https://images.unsplash.com/photo-1603398938378-e54eab446dde?q=80&w=400&auto=format&fit=crop", message: "¡Acción Vital! Todo desecho de curación hogareña va al ROJO. Evita focos infecciosos y protege a los recolectores." },
-            { name: "Envase de Agroquímico / Veneno", bin: "rojo", image: "https://images.unsplash.com/photo-1628549762413-568393d9d300?q=80&w=400&auto=format&fit=crop", message: "¡Obligatorio! Envases tóxicos o químicos van al ROJO. Nunca deben quemarse ni enterrarse en el patio de casa." },
-            { name: "Pañales Usados", bin: "negro", image: "https://images.unsplash.com/photo-1590001155093-a3c66ab0c3ff?q=80&w=400&auto=format&fit=crop", message: "¡Correcto! Los pañales van al NEGRO (basura común). No son reciclables ni aptos para compost doméstico." },
-            { name: "Colillas de Cigarrillo", bin: "negro", image: "https://images.unsplash.com/photo-1516733725897-1aa73b87c8e8?q=80&w=400&auto=format&fit=crop", message: "¡Bien clasificado! Las colillas van al NEGRO. Contienen cientos de sustancias tóxicas que arruinan el suelo." },
-            { name: "Espejo Roto o Cerámicas", bin: "negro", image: "https://images.unsplash.com/photo-1596205469424-df3513365be0?q=80&w=400&auto=format&fit=crop", message: "¡Bien pensado! Cristales de espejos y cerámicas van al NEGRO porque dañan el proceso de reciclado del vidrio común." }
+            { name: "Envase de Agroquímico / Veneno", bin: "rojo", image: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Pesticide_containers_at_collection_point_at_the_cooperative_in_Athee-sur-Cher.jpg/400px-Pesticide_containers_at_collection_point_at_the_cooperative_in_Athee-sur-Cher.jpg", message: "¡Obligatorio! Envases tóxicos o químicos van al ROJO. Nunca deben quemarse ni enterrarse en el patio de casa." },
+            { name: "Pañales Usados", bin: "negro", image: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Disposal_diaper_01.jpg/400px-Disposal_diaper_01.jpg", message: "¡Correcto! Los pañales van al NEGRO (basura común). No son reciclables ni aptos para compost doméstico." },
+            { name: "Colillas de Cigarrillo", bin: "negro", image: "https://images.unsplash.com/photo-1599707923761-424a919cbbf9?q=80&w=400&auto=format&fit=crop", message: "¡Bien clasificado! Las colillas van al NEGRO. Contienen cientos de sustancias tóxicas que arruinan el suelo." },
+            { name: "Espejo Roto o Cerámicas", bin: "negro", image: "https://images.unsplash.com/photo-1613243555988-441166d4d6fd?q=80&w=400&auto=format&fit=crop", message: "¡Bien pensado! Cristales de espejos y cerámicas van al NEGRO porque dañan el proceso de reciclado del vidrio común." }
         ];
 
         // FASE 2: BANCO DE 10 PREGUNTAS MÚLTIPLE CHOICE
@@ -228,8 +243,8 @@
             { q: "¿Qué sucede con una colilla de cigarrillo tirada en la vereda?", c: ["Se disuelve con el sol en un día", "Es absorbida por las plantas como abono", "Contamina hasta 50 litros de agua al llegar a las alcantarillas"], a: 2, m: "Las colillas concentran nicotina y alquitrán que envenenan los cursos fluviales urbanos." },
             { q: "¿Por qué los desechos patogénicos como gasas van al contenedor ROJO?", c: ["Para diferenciarlos por estética", "Para evitar la propagación de virus, bacterias y proteger al recolector", "Porque el rojo brilla de noche"], a: 1, m: "La gestión segura de residuos de salud frena brotes infecciosos en los barrios comunitarios." },
             { q: "Cuál es la forma ideal de colaborar con los recuperadores urbanos (cartoneros)?", c: ["Entregar los materiales secos, limpios y ordenados en la mano o bolsa verde", "Mezclar todo en bolsas negras cerradas", "Dejar los vidrios rotos sueltos"], a: 0, m: "Facilita su trabajo digno, previene que se corten las manos y acelera la cadena sustentable." },
-            { q: "¿Qué problema sanitario directo causa acumular neumáticos o cacharros con agua?", c: ["Genera cortocircuitos eléctricos", "Favorece el criadero del mosquito Aedes aegypti (Dengue)", "Arruina la visual del vecindario"], a: 1, m: "El descacharreo y reciclaje de plásticos elimina los reservorios donde se reproduce el Dengue." },
-            { q: "Si hablamos de separar residuos, ¿qué significa el concepto 'Separación en Origen'?", c: ["Llevar la basura a su país de origen", "Clasificar los materiales justo en el lugar donde se generan (el hogar)", "Comprar productos importados"], a: 1, m: "El cambio real empieza en la cocina de cada hogar, dividiendo lo útil de lo inservible." },
+            { q: "Qué problema sanitario directo causa acumular neumáticos o cacharros con agua?", c: ["Genera cortocircuitos eléctricos", "Favorece el criadero del mosquito Aedes aegypti (Dengue)", "Arruina la visual del vecindario"], a: 1, m: "El descacharreo y reciclaje de plásticos elimina los reservorios donde se reproduce el Dengue." },
+            { q: "Si hablamos de separar residuos, ¿qué significa el concept 'Separación en Origen'?", c: ["Llevar la basura a su país de origen", "Clasificar los materiales justo en el lugar donde se generan (el hogar)", "Comprar productos importados"], a: 1, m: "El cambio real empieza en la cocina de cada hogar, dividiendo lo útil de lo inservible." },
             { q: "¿Qué impacto positivo genera el reciclaje de aluminio en comparación con extraerlo de la tierra?", c: ["Ahorra hasta un 95% de energía y disminuye la polución industrial", "Hace que el metal sea transparente", "No altera en nada los costos"], a: 0, m: "Reciclar latas reduce drásticamente las emisiones de carbono globales y locales." }
         ];
 
@@ -296,14 +311,14 @@
             if (chosenBin === res.bin) {
                 playBeep('success');
                 p1Correct++;
-                // Suma +4% en Fase 1
+                // Suma +4% en Fase 1 por acierto
                 scoreEco = Math.min(100, scoreEco + 4);
                 scoreHealth = Math.min(100, scoreHealth + 4);
                 panel.className = "p-2.5 rounded-xl border text-center text-xs font-bold leading-relaxed bg-green-50 border-green-200 text-green-800";
                 card.classList.add('flash-success');
             } else {
                 playBeep('error');
-                // Resta si se equivoca, sin bajar de 0%
+                // Resta si falla, sin bajar de 0%
                 scoreEco = Math.max(0, scoreEco - 4);
                 scoreHealth = Math.max(0, scoreHealth - 4);
                 panel.className = "p-2.5 rounded-xl border text-center text-xs font-bold leading-relaxed bg-rose-50 border-rose-200 text-rose-800";
@@ -367,7 +382,7 @@
             if (chosenIdx === qData.a) {
                 playBeep('success');
                 p2Correct++;
-                // Suma +5% en Fase 2
+                // Suma +5% en Fase 2 por acierto
                 scoreEco = Math.min(100, scoreEco + 5);
                 scoreHealth = Math.min(100, scoreHealth + 5);
                 panel.className = "p-2.5 rounded-xl border text-center text-xs font-bold leading-relaxed bg-green-50 border-green-200 text-green-800";
