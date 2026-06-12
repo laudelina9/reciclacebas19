@@ -54,11 +54,11 @@
             <div class="grid grid-cols-2 gap-3 mt-3 bg-black/15 p-2 rounded-xl backdrop-blur-xs text-xs font-bold">
                 <div class="flex items-center justify-center space-x-1">
                     <span>🌍 Ambiente:</span>
-                    <span id="stat-eco" class="text-yellow-300">50%</span>
+                    <span id="stat-eco" class="text-yellow-300">0%</span>
                 </div>
                 <div class="flex items-center justify-center space-x-1">
                     <span>🏥 Salud Pública:</span>
-                    <span id="stat-health" class="text-yellow-300">50%</span>
+                    <span id="stat-health" class="text-yellow-300">0%</span>
                 </div>
             </div>
         </header>
@@ -72,7 +72,6 @@
             <section id="screen-welcome" class="w-full text-center my-auto space-y-5 flex flex-col items-center">
                 <div class="w-full max-w-[200px] rounded-xl overflow-hidden shadow-xs border border-slate-200 bg-white p-2">
                     <img id="logo-welcome" src="LogoCebas.jpeg" 
-                         onerror="verificarExtensionLogo(this)"
                          class="w-full h-auto block mx-auto rounded-lg" 
                          alt="Logo CEBAS 19">
                 </div>
@@ -150,7 +149,6 @@
             <section id="screen-results" class="w-full hidden text-center space-y-5 my-auto px-1 flex flex-col items-center">
                 <div class="w-full max-w-[130px] rounded-xl overflow-hidden shadow-xs border border-slate-200 bg-white p-1">
                     <img id="logo-results" src="LogoCebas.jpeg" 
-                         onerror="verificarExtensionLogo(this)"
                          class="w-full h-auto block mx-auto rounded-lg" 
                          alt="Logo CEBAS 19 Cierre">
                 </div>
@@ -163,7 +161,7 @@
                 <div class="w-full bg-slate-50 p-4 rounded-2xl border border-slate-100 text-left space-y-2 text-sm font-bold text-slate-700 shadow-inner">
                     <p><i class="fa-solid fa-circle-check text-emerald-600 mr-2"></i> Clasificaciones correctas: <span id="final-correct" class="text-emerald-600">0/12</span></p>
                     <p><i class="fa-solid fa-circle-question text-indigo-600 mr-2"></i> Trivia respondida: <span id="final-trivia" class="text-indigo-600">0/10</span></p>
-                    <p><i class="fa-solid fa-heart-pulse text-rose-600 mr-2"></i> Salud Comunitaria Lograda: <span id="final-points" class="text-rose-600">50%</span></p>
+                    <p><i class="fa-solid fa-heart-pulse text-rose-600 mr-2"></i> Salud Comunitaria Lograda: <span id="final-points" class="text-rose-600">0%</span></p>
                 </div>
 
                 <div class="w-full grid grid-cols-2 gap-3">
@@ -185,25 +183,6 @@
     </div>
 
     <script>
-        // SISTEMA AUTOMÁTICO DE RECUPERACIÓN PARA EL LOGO INSTITUCIONAL
-        let intentosLogo = 0;
-        function verificarExtensionLogo(elementoImg) {
-            intentosLogo++;
-            if (intentosLogo === 1) {
-                elementoImg.src = "LogoCebas.jpg"; // Intento 2: Sin la 'e'
-            } else if (intentosLogo === 2) {
-                elementoImg.src = "LogoCebas.png"; // Intento 3: Formato PNG alternativo
-            } else if (intentosLogo === 3) {
-                elementoImg.src = "images/LogoCebas.jpeg"; // Intento 4: Dentro de subcarpeta images
-            } else if (intentosLogo === 4) {
-                elementoImg.src = "images/LogoCebas.jpg"; // Intento 5: Subcarpeta con formato corto
-            } else {
-                // Si todo falla por completo, muestra un ícono escolar genérico para no romper el diseño estético
-                elementoImg.onerror = null;
-                elementoImg.parentElement.innerHTML = `<div class="w-16 h-16 bg-emerald-100 text-emerald-700 rounded-full flex items-center justify-center mx-auto text-2xl shadow-inner"><i class="fa-solid fa-school"></i></div><p class="text-[10px] text-slate-400 font-bold mt-1 uppercase">CEBAS Nº 19</p>`;
-            }
-        }
-
         // CONFIGURACIÓN DE AUDIO SINTETIZADO NATIVO
         const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
         function playBeep(type) {
@@ -224,20 +203,20 @@
             }
         }
 
-        // FASE 1: FOTOS REALES DE RESIDUOS
+        // FASE 1: FOTOS REALES DE RESIDUOS (IMÁGENES CORREGIDAS AL 100%)
         const phase1Database = [
             { name: "Botella de Plástico Vacía", bin: "amarillo", image: "https://images.unsplash.com/photo-1523293182086-7651a899d37f?q=80&w=400&auto=format&fit=crop", message: "¡Correcto! Las botellas plásticas van al AMARILLO. Así evitamos que tarden 500 años en degradarse en los basurales." },
             { name: "Latas de Metal y Aluminio", bin: "amarillo", image: "https://images.unsplash.com/photo-1536657464919-892534f60d6e?q=80&w=400&auto=format&fit=crop", message: "¡Muy bien! Latas y metales van al AMARILLO. Su reutilización evita la explotación minera a cielo abierto." },
-            { name: "Cajas de Cartón Limpias", bin: "naranja", image: "https://images.unsplash.com/photo-1595079676339-1534801ad6cf?q=80&w=400&auto=format&fit=crop", message: "¡Excelente! El cartón seco va al NARANJA, permitiendo recuperar celulosa y previniendo la deforestación." },
+            { name: "Cajas de Cartón Limpias", bin: "naranja", image: "https://images.unsplash.com/photo-1530587191325-3db32d826c18?q=80&w=400&auto=format&fit=crop", message: "¡Excelente! El cartón seco va al NARANJA, permitiendo recuperar celulosa y previniendo la deforestación." },
             { name: "Revistas y Diarios Viejos", bin: "naranja", image: "https://images.unsplash.com/photo-1504711434969-e33886168f5c?q=80&w=400&auto=format&fit=crop", message: "¡Perfecto! Los papeles secos van al NARANJA. Si están húmedos o con aceite, deben descartarse en el negro." },
             { name: "Frasco de Vidrio Sano", bin: "verde", image: "https://images.unsplash.com/photo-1602143407151-7111542de6e8?q=80&w=400&auto=format&fit=crop", message: "¡Espectacular! El vidrio va al VERDE. Se funde infinitas veces sin perder jamás sus propiedades de higiene." },
             { name: "Pilas y Baterías Usadas", bin: "rojo", image: "https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?q=80&w=400&auto=format&fit=crop", message: "¡Esencial! Las pilas van al ROJO por su alta toxicidad química. Previene que metales pesados envenenen el agua del barrio." },
             { name: "Restos de Comida / Orgánicos", bin: "marron", image: "https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=400&auto=format&fit=crop", message: "¡Excelente! Los restos orgánicos van al MARRÓN para compostaje, devolviendo nutrientes sanos a la tierra." },
             { name: "Curitas y Gasas Usadas", bin: "rojo", image: "https://images.unsplash.com/photo-1603398938378-e54eab446dde?q=80&w=400&auto=format&fit=crop", message: "¡Acción Vital! Todo desecho de curación hogareña va al ROJO. Evita focos infecciosos y protege a los recolectores." },
-            { name: "Envase de Agroquímico / Veneno", bin: "rojo", image: "https://images.unsplash.com/photo-1589156280159-27698a70f29e?q=80&w=400&auto=format&fit=crop", message: "¡Obligatorio! Envases tóxicos o químicos van al ROJO. Nunca deben quemarse ni enterrarse en el patio de casa." },
-            { name: "Pañales Usados", bin: "negro", image: "https://images.unsplash.com/photo-1557181554-edd1b012d64a?q=80&w=400&auto=format&fit=crop", message: "¡Correcto! Los pañales van al NEGRO (basura común). No son reciclables ni aptos para compost doméstico." },
-            { name: "Colillas de Cigarrillo", bin: "negro", image: "https://images.unsplash.com/photo-1556955073-9875e533f841?q=80&w=400&auto=format&fit=crop", message: "¡Bien clasificado! Las colillas van al NEGRO. Contienen cientos de sustancias tóxicas que arruinan el suelo." },
-            { name: "Espejo Roto o Cerámicas", bin: "negro", image: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=400&auto=format&fit=crop", message: "¡Bien pensado! Cristales de espejos y cerámicas van al NEGRO porque dañan el proceso de reciclado del vidrio común." }
+            { name: "Envase de Agroquímico / Veneno", bin: "rojo", image: "https://images.unsplash.com/photo-1628549762413-568393d9d300?q=80&w=400&auto=format&fit=crop", message: "¡Obligatorio! Envases tóxicos o químicos van al ROJO. Nunca deben quemarse ni enterrarse en el patio de casa." },
+            { name: "Pañales Usados", bin: "negro", image: "https://images.unsplash.com/photo-1590001155093-a3c66ab0c3ff?q=80&w=400&auto=format&fit=crop", message: "¡Correcto! Los pañales van al NEGRO (basura común). No son reciclables ni aptos para compost doméstico." },
+            { name: "Colillas de Cigarrillo", bin: "negro", image: "https://images.unsplash.com/photo-1516733725897-1aa73b87c8e8?q=80&w=400&auto=format&fit=crop", message: "¡Bien clasificado! Las colillas van al NEGRO. Contienen cientos de sustancias tóxicas que arruinan el suelo." },
+            { name: "Espejo Roto o Cerámicas", bin: "negro", image: "https://images.unsplash.com/photo-1596205469424-df3513365be0?q=80&w=400&auto=format&fit=crop", message: "¡Bien pensado! Cristales de espejos y cerámicas van al NEGRO porque dañan el proceso de reciclado del vidrio común." }
         ];
 
         // FASE 2: BANCO DE 10 PREGUNTAS MÚLTIPLE CHOICE
@@ -245,7 +224,7 @@
             { q: "¿Por qué es clave limpiar los plásticos antes de reciclarlos?", c: ["Para que pesen menos", "Para que no pudran ni contaminen otros materiales secos", "Para usar más agua de la canilla"], a: 1, m: "Los restos de comida pudren el lote completo de reciclaje, obligando a tirarlo a la basura." },
             { q: "¿Qué peligro básico causan las pilas tiradas en la tierra común?", c: ["Atraen rayos solares", "Contaminan las napas de agua subterránea que consume la gente", "Hacen crecer pasto azul"], a: 1, m: "Una sola pila de reloj puede contaminar miles de litros de agua comunitaria por décadas." },
             { q: "¿Qué beneficio directo genera hacer compost con los residuos orgánicos (marrón)?", c: ["Reduce a la mitad la basura que va al basural de la ciudad", "Hace que los camiones viajen más rápido", "Sirve para ahuyentar perros"], a: 0, m: "Casi el 50% de los residuos domésticos son orgánicos; compostarlos alivia el colapso ambiental." },
-            { q: "Si quemamos basura en el fondo de casa, ¿qué impacto directo tiene?", c: ["Limpia las impurezas del suelo", "Libera gases tóxicos que dañan las vías respiratorias de los vecinos", "Mejora el clima de la cuadra"], a: 1, m: "El humo de basura quemada contiene dioxinas que afectan gravemente los pulmones de niños y abuelos." },
+            { q: "Si quemamos basura en el fondo de casa, ¿qué impacto directo tiene?", c: ["Limpia las impurities del suelo", "Libera gases tóxicos que dañan las vías respiratorias de los vecinos", "Mejora el clima de la cuadra"], a: 1, m: "El humo de basura quemada contiene dioxinas que afectan gravemente los pulmones de niños y abuelos." },
             { q: "¿Qué sucede con una colilla de cigarrillo tirada en la vereda?", c: ["Se disuelve con el sol en un día", "Es absorbida por las plantas como abono", "Contamina hasta 50 litros de agua al llegar a las alcantarillas"], a: 2, m: "Las colillas concentran nicotina y alquitrán que envenenan los cursos fluviales urbanos." },
             { q: "¿Por qué los desechos patogénicos como gasas van al contenedor ROJO?", c: ["Para diferenciarlos por estética", "Para evitar la propagación de virus, bacterias y proteger al recolector", "Porque el rojo brilla de noche"], a: 1, m: "La gestión segura de residuos de salud frena brotes infecciosos en los barrios comunitarios." },
             { q: "Cuál es la forma ideal de colaborar con los recuperadores urbanos (cartoneros)?", c: ["Entregar los materiales secos, limpios y ordenados en la mano o bolsa verde", "Mezclar todo en bolsas negras cerradas", "Dejar los vidrios rotos sueltos"], a: 0, m: "Facilita su trabajo digno, previene que se corten las manos y acelera la cadena sustentable." },
@@ -254,11 +233,11 @@
             { q: "¿Qué impacto positivo genera el reciclaje de aluminio en comparación con extraerlo de la tierra?", c: ["Ahorra hasta un 95% de energía y disminuye la polución industrial", "Hace que el metal sea transparente", "No altera en nada los costos"], a: 0, m: "Reciclar latas reduce drásticamente las emisiones de carbono globales y locales." }
         ];
 
-        // VARIABLES DE ESTADO DEL JUEGO
+        // VARIABLES DE ESTADO DEL JUEGO (ARRANCAN ESTRICTAMENTE EN 0%)
         let currentP1Idx = 0;
         let currentP2Idx = 0;
-        let scoreEco = 50;
-        let scoreHealth = 50;
+        let scoreEco = 0;
+        let scoreHealth = 0;
         let p1Correct = 0;
         let p2Correct = 0;
         let isProcessing = false;
@@ -268,7 +247,6 @@
             document.getElementById('stat-health').innerText = scoreHealth + "%";
         }
 
-        // CONTROL DE ABANDONO CON MENSAJE DE CONFIRMACIÓN NATIIVO
         function solicitarSalir() {
             const confirmar = confirm("¿Estás seguro de que querés abandonar? Perderás todo tu progreso actual en el desafío.");
             if (confirmar) {
@@ -283,6 +261,10 @@
             document.getElementById('btn-abandonar').classList.remove('hidden');
             loadResidue();
         }
+
+        document.addEventListener("DOMContentLoaded", function() {
+            updateStats();
+        });
 
         function loadResidue() {
             if (currentP1Idx >= phase1Database.length) {
@@ -314,14 +296,16 @@
             if (chosenBin === res.bin) {
                 playBeep('success');
                 p1Correct++;
+                // Suma +4% en Fase 1
                 scoreEco = Math.min(100, scoreEco + 4);
                 scoreHealth = Math.min(100, scoreHealth + 4);
                 panel.className = "p-2.5 rounded-xl border text-center text-xs font-bold leading-relaxed bg-green-50 border-green-200 text-green-800";
                 card.classList.add('flash-success');
             } else {
                 playBeep('error');
-                scoreEco = Math.max(0, scoreEco - 6);
-                scoreHealth = Math.max(0, scoreHealth - 6);
+                // Resta si se equivoca, sin bajar de 0%
+                scoreEco = Math.max(0, scoreEco - 4);
+                scoreHealth = Math.max(0, scoreHealth - 4);
                 panel.className = "p-2.5 rounded-xl border text-center text-xs font-bold leading-relaxed bg-rose-50 border-rose-200 text-rose-800";
                 card.classList.add('flash-error');
             }
@@ -383,8 +367,9 @@
             if (chosenIdx === qData.a) {
                 playBeep('success');
                 p2Correct++;
-                scoreEco = Math.min(100, scoreEco + 6);
-                scoreHealth = Math.min(100, scoreHealth + 6);
+                // Suma +5% en Fase 2
+                scoreEco = Math.min(100, scoreEco + 5);
+                scoreHealth = Math.min(100, scoreHealth + 5);
                 panel.className = "p-2.5 rounded-xl border text-center text-xs font-bold leading-relaxed bg-green-50 border-green-200 text-green-800";
                 optionButtons[chosenIdx].className = "choice-btn w-full p-3 bg-green-100 border border-green-300 text-green-800 text-xs font-bold rounded-xl text-left flex items-start space-x-2";
                 card.classList.add('flash-success');
@@ -411,7 +396,6 @@
             document.getElementById('screen-results').classList.remove('hidden');
             document.getElementById('progress-bar').style.width = `100%`;
             document.getElementById('game-phase-title').innerText = "Desafío Finalizado";
-            
             document.getElementById('btn-abandonar').classList.add('hidden');
 
             const finalTitle = document.getElementById('final-title');
@@ -440,7 +424,7 @@
             document.getElementById('screen-welcome').classList.remove('hidden');
             document.getElementById('btn-abandonar').classList.remove('hidden');
             document.getElementById('progress-bar').style.width = `0%`;
-            currentP1Idx = 0; currentP2Idx = 0; scoreEco = 50; scoreHealth = 50; p1Correct = 0; p2Correct = 0;
+            currentP1Idx = 0; currentP2Idx = 0; scoreEco = 0; scoreHealth = 0; p1Correct = 0; p2Correct = 0;
             updateStats();
         }
 
