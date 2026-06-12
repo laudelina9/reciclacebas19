@@ -91,7 +91,7 @@
 
                 <div class="w-full space-y-2 flex flex-col items-center">
                     <div class="w-48 h-48 bg-slate-100 border-4 border-white shadow-md rounded-2xl overflow-hidden flex items-center justify-center relative">
-                        <img id="residue-image" src="" alt="Fotografía Real" class="w-full h-full object-contain bg-white">
+                        <img id="residue-image" src="" alt="Fotografía Real" class="w-full h-full object-cover">
                     </div>
                     <h3 id="residue-name" class="text-base font-black text-slate-800 text-center tracking-wide uppercase">Cargando...</h3>
                 </div>
@@ -193,20 +193,20 @@
             }
         }
 
-        // BASE DE DATOS REVISADA MANUALMENTE CON ENLACES PRECISOS DE WIKIMEDIA COMMONS
+        // BASE DE DATOS CONFIGURADA CON TUS ARCHIVOS LOCALES BAJADOS
         const phase1Database = [
-            { name: "Botella de Plástico Vacía", bin: "amarillo", image: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/Plastic_water_bottle_with_cap.jpg/400px-Plastic_water_bottle_with_cap.jpg", message: "¡Correcto! Las botellas plásticas van al AMARILLO. Así evitamos que tarden 500 años en degradarse en los basurales." },
-            { name: "Latas de Metal y Aluminio", bin: "amarillo", image: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Aluminium_cans_crushed_ready_for_recycling.jpg/400px-Aluminium_cans_crushed_ready_for_recycling.jpg", message: "¡Muy bien! Latas y metales van al AMARILLO. Su reutilización evita la explotación minera a cielo abierto." },
-            { name: "Cajas de Cartón Limpias", bin: "naranja", image: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Cardboard_boxes_unfolded.jpg/400px-Cardboard_boxes_unfolded.jpg", message: "¡Excelente! El cartón seco va al NARANJA, permitiendo recuperar celulosa y previniendo la deforestación." },
-            { name: "Revistas y Diarios Viejos", bin: "naranja", image: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Daily_Newspapers_Stack.jpg/400px-Daily_Newspapers_Stack.jpg", message: "¡Perfecto! Los papeles secos van al NARANJA. Si están húmedos o con aceite, deben descartarse en el negro." },
-            { name: "Frasco de Vidrio Sano", bin: "verde", image: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/07/Glass_jars.jpg/400px-Glass_jars.jpg", message: "¡Espectacular! El vidrio va al VERDE. Se funde infinitas veces sin perder jamás sus propiedades de higiene." },
-            { name: "Pilas y Baterías Usadas", bin: "rojo", image: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/Batteries_all_sizes.jpg/400px-Batteries_all_sizes.jpg", message: "¡Esencial! Las pilas van al ROJO por su alta toxicidad química. Previene que metales pesados envenenen el agua del barrio." },
-            { name: "Restos de Comida / Orgánicos", bin: "marron", image: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/03/Organic_waste_for_compost.jpg/400px-Organic_waste_for_compost.jpg", message: "¡Excelente! Los restos orgánicos van al MARRÓN para compostaje, devolviendo nutrientes sanos a la tierra." },
-            { name: "Curitas y Gasas Usadas", bin: "rojo", image: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/Medical_Gauze_Bandage.jpg/400px-Medical_Gauze_Bandage.jpg", message: "¡Acción Vital! Todo desecho de curación hogareña va al ROJO. Evita focos infecciosos y protege a los recolectores." },
-            { name: "Envase de Agroquímico / Veneno", bin: "rojo", image: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Plastic_pesticide_bottle.jpg/400px-Plastic_pesticide_bottle.jpg", message: "¡Obligatorio! Envases tóxicos o químicos van al ROJO. Nunca deben quemarse ni enterrarse en el patio de casa." },
-            { name: "Pañales Usados", bin: "negro", image: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Disposable_diaper_unused.jpg/400px-Disposable_diaper_unused.jpg", message: "¡Correcto! Los pañales van al NEGRO (basura común). No son reciclables ni aptos para compost doméstico." },
-            { name: "Colillas de Cigarrillo", bin: "negro", image: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/Cigarette_butts_in_ashtray.jpg/400px-Cigarette_butts_in_ashtray.jpg", message: "¡Bien clasificado! Las colillas van al NEGRO. Contienen cientos de sustancias tóxicas que arruinan el suelo." },
-            { name: "Espejo Roto o Cerámicas", bin: "negro", image: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Broken_mirror_on_ground.jpg/400px-Broken_mirror_on_ground.jpg", message: "¡Bien pensado! Cristales de espejos y cerámicas van al NEGRO porque dañan el proceso de reciclado del vidrio común." }
+            { name: "Botella de Plástico Vacía", bin: "amarillo", image: "R1-botellas.jpg", message: "¡Correcto! Las botellas plásticas van al AMARILLO. Así evitamos que tarden 500 años en degradarse en los basurales." },
+            { name: "Latas de Metal y Aluminio", bin: "amarillo", image: "R2-metal.jpg", message: "¡Muy bien! Latas y metales van al AMARILLO. Su reutilización evita la explotación minera a cielo abierto." },
+            { name: "Cajas de Cartón Limpias", bin: "naranja", image: "R3-cajas.jpg", message: "¡Excelente! El cartón seco va al NARANJA, permitiendo recuperar celulosa y previniendo la deforestación." },
+            { name: "Revistas y Diarios Viejos", bin: "naranja", image: "R4-diarios.jpg", message: "¡Perfecto! Los papeles secos van al NARANJA. Si están húmedos o con aceite, deben descartarse en el negro." },
+            { name: "Frasco de Vidrio Sano", bin: "verde", image: "R5-frasco.jpg", message: "¡Espectacular! El vidrio va al VERDE. Se funde infinitas veces sin perder jamás sus propiedades de higiene." },
+            { name: "Pilas y Baterías Usadas", bin: "rojo", image: "R6-pilas.jpg", message: "¡Esencial! Las pilas van al ROJO por su alta toxicidad química. Previene que metales pesados envenenen el agua del barrio." },
+            { name: "Restos de Comida / Orgánicos", bin: "marron", image: "R7-comida.jpg", message: "¡Excelente! Los restos orgánicos van al MARRÓN para compostaje, devolviendo nutrientes sanos a la tierra." },
+            { name: "Curitas y Gasas Usadas", bin: "rojo", image: "R8-gasas.jpg", message: "¡Acción Vital! Todo desecho de curación hogareña va al ROJO. Evita focos infecciosos y protege a los recolectores." },
+            { name: "Envase de Agroquímico / Veneno", bin: "rojo", image: "R9-agroq.jpg", message: "¡Obligatorio! Envases tóxicos o químicos van al ROJO. Nunca deben quemarse ni enterrarse en el patio de casa." },
+            { name: "Pañales Usados", bin: "negro", image: "R10-pañales.jpg", message: "¡Correcto! Los pañales van al NEGRO (basura común). No son reciclables ni aptos para compost doméstico." },
+            { name: "Colillas de Cigarrillo", bin: "negro", image: "R11-cigarros.jpg", message: "¡Bien clasificado! Las colillas van al NEGRO. Contienen cientos de sustancias tóxicas que arruinan el suelo." },
+            { name: "Espejo Roto o Cerámicas", bin: "negro", image: "R12-ceramica.jpg", message: "¡Bien pensado! Cristales de espejos y cerámicas van al NEGRO porque dañan el proceso de reciclado del vidrio común." }
         ];
 
         // FASE 2: TRIVIA MULTIPLE CHOICE ORIGINAL
@@ -225,6 +225,7 @@
 
         let currentP1Idx = 0; let currentP2Idx = 0; scoreEco = 0; scoreHealth = 0; p1Correct = 0; p2Correct = 0; isProcessing = false;
 
+        // Forzar recarga de imágenes locales al cambiar de residuo
         function updateStats() {
             document.getElementById('stat-eco').innerText = scoreEco + "%";
             document.getElementById('stat-health').innerText = scoreHealth + "%";
